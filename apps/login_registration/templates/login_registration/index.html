@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">       
+        
+        <title>Register/Login</title>
+    
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>
+        
+        {% load static %}
+        <!-- My CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'login_registration/css/main.css'%}">
+        <!-- My Javascript -->
+        <script type="text/javascript" src="{% static 'login_registration/javascript/main.js'%}"></script>
+    </head>
+<body class="bg-dark text-light">
+    <div class="container row">
+        <div class="col-6">
+            <h2 class="text-left">Register</h2>
+            <form action="/register/" method="POST" class="col-6">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name" id="first_name" class="form-control">
+                    {% if messages %} 
+                        {% for message in messages %}
+                            {% if message.tags == 'first_name error' %} 
+                                <p class="error text-danger">{{ message }}</p> 
+                            {% endif %}
+                        {% endfor %} 
+                    {% endif %}
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" id="last_name" class="form-control">
+                    {% if messages %} 
+                        {% for message in messages %}
+                            {% if message.tags == 'last_name error' %} 
+                                <p class="error text-danger">{{ message }}</p> 
+                            {% endif %}
+                        {% endfor %} 
+                    {% endif %}
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" class="form-control">
+                    {% if messages %} 
+                        {% for message in messages %}
+                            {% if message.tags == 'username error' %} 
+                                <p class="error text-danger">{{ message }}</p> 
+                            {% endif %}
+                        {% endfor %} 
+                    {% endif %}                            
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control">
+                    {% if messages %} 
+                        {% for message in messages %}
+                            {% if message.tags == 'password error' %} 
+                                <p class="error text-danger">{{ message }}</p> 
+                            {% endif %}
+                        {% endfor %} 
+                    {% endif %}
+                    <label for="confirm_pw">Confirm PW</label>
+                    <input type="password" name="confirm_pw" id="confirm_pw" class="form-control">
+                    {% if messages %} 
+                        {% for message in messages %}
+                            {% if message.tags == 'confirm_pw error' %} 
+                                <p class="error text-danger">{{ message }}</p> 
+                            {% endif %}
+                        {% endfor %} 
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-primary float-right">Register</button>
+            </form>
+        </div>
+        <div class="col-6">
+            <h2>Login</h2>
+            <form action="/login/" method="POST" class="col-6">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="login_username" id="username" class="form-control">
+                    <label for="password">Password</label>
+                    <input type="password" name="login_password" id="password" class="form-control">
+                    {% if messages %} 
+                        {% for message in messages %}
+                            {% if message.tags == 'login error' %} 
+                                <p class="error text-danger">{{ message }}</p> 
+                            {% endif %}
+                        {% endfor %} 
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-primary float-right">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
